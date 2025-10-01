@@ -117,14 +117,14 @@ author:
   avatar           : "/assets/1.jpeg"
   bio              : "자유로운 땃쥐"
   location         : "대한민국"
-  email            : "jaeseoyun9891@gmail.com"
+  email            : #
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
       url: "mailto:jaeseoyun9891@gmail.com"
-    - label: "Website"
+    - label: "Github"
       icon: "fas fa-fw fa-link"
-      # url: "https://your-website.com"
+      url: https://github.com/jaeseo0214
     - label: "Twitter"
       icon: "fab fa-fw fa-twitter-square"
       # url: "https://twitter.com/"
@@ -140,7 +140,7 @@ author:
 
 # Site Footer
 footer:
-  links:
+  #links: 
     #- label: "Twitter"
       #icon: "fab fa-fw fa-twitter-square"
       # url:
@@ -325,3 +325,15 @@ defaults:
       comments: # true
       share: true
       related: true
+      sidebar:
+        nav: "categories_sidebar"
+  
+  - scope:
+      path: "categories"
+      type: pages
+      layout: single
+    values:
+      sidebar:
+        nav: "categories_sidebar"
+  
+  

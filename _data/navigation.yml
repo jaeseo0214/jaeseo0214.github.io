@@ -1,12 +1,21 @@
 # main links
 main:
-  - title: "Quick-Start Guide"
-    url: https://mmistakes.github.io/minimal-mistakes/docs/quick-start-guide/
-  # - title: "About"
-  #   url: https://mmistakes.github.io/minimal-mistakes/about/
-  # - title: "Sample Posts"
-  #   url: /year-archive/
+  - title: "Home"
+    url: /
+  - title: "Categories"
+    url: /categories/
+  - title: "Tag"
+    url: /tags/
   # - title: "Sample Collections"
   #   url: /collection-archive/
   # - title: "Sitemap"
   #   url: /sitemap/
+categories_sidebar:
+  - title: Java
+    children:
+      - title: "Java 문법"
+        url: /categories/java_grammer/
+  - title: Project
+    children:
+      - title: "사용자 코딩 학습 AI"
+        url: /categories/project_personal_ai/
