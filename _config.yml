@@ -114,14 +114,14 @@ analytics:
 # Site Author
 author:
   name             : "재서"
-  avatar           :  path of avatar image, "/assets/images/1.jpeg"
+  avatar           : /assets/1.jpeg
   bio              : "자유로운 땃쥐"
   location         : "한국"
   email            :
   links:
     - label: "Email"
       icon: "fas fa-fw fa-envelope-square"
-      url: "jaeseoyun9891@gmail.com"
+      url: "mailto: jaeseoyun9891@gmail.com"
     - label: "Website"
       icon: "fas fa-fw fa-link"
       # url: "https://your-website.com"
