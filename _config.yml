@@ -114,7 +114,7 @@ analytics:
 # Site Author
 author:
   name             : "재서"
-  avatar           : path of avatar image, "assets\1.jpeg"
+  avatar           :  path of avatar image, "/assets/images/1.jpeg"
   bio              : "자유로운 땃쥐"
   location         : "한국"
   email            :
