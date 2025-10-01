@@ -1,0 +1,18 @@
+.author__avatar {
+    max-width: 150px; /* 원하는 크기로 키웁니다. */
+    max-height: 150px;
+    border-radius: 50%; /* 이미지를 완벽한 원형으로 만듭니다. */
+    object-fit: cover; 
+}
+
+/* 2. 프로필 텍스트 및 링크 간격 조정 */
+.author__content {
+    margin-top: 1em; 
+}
+
+/* 3. 링크 항목 (이메일, 위치 등) 간격 조정 */
+.author__urls {
+    li {
+        margin-bottom: 0.8em; /* 원하는 세로 간격으로 조정합니다. */
+    }
+}
