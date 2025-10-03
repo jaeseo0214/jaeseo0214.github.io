@@ -322,18 +322,11 @@ defaults:
       layout: single
       author_profile: true
       read_time: true
-      comments: # true
+      comments:  true
       share: true
       related: true
       sidebar:
         nav: "categories_sidebar"
   
-  - scope:
-      path: "categories"
-      type: pages
-      layout: single
-    values:
-      sidebar:
-        nav: "categories_sidebar"
   
   
