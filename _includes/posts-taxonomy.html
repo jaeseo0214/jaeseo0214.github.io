@@ -1,37 +1,102 @@
-{% assign items_max = 0 %}
-{% for item in include.taxonomies %}
-  {% if item[1].size > items_max %}
-    {% assign items_max = item[1].size %}
-  {% endif %}
-{% endfor %}
-
-<ul class="taxonomy__index">
-  {% for i in (1..items_max) reversed %}
-    {% for item in include.taxonomies %}
-      {% if item[1].size == i %}
-        <li>
-          <a href="#{{ item[0] | slugify }}">
-            <strong>{{ item[0] }}</strong> <span class="taxonomy__count">{{ i }}</span>
-          </a>
-        </li>
-      {% endif %}
-    {% endfor %}
-  {% endfor %}
-</ul>
+{% comment %} 
+===================================================================================
+1. 카테고리 페이지 조건 확인 (Tag 페이지 노출 방지)
+===================================================================================
+{% endcomment %}
+{% if page.layout contains 'category' or page.url contains 'categories' %} 
 
 {% assign entries_layout = page.entries_layout | default: 'list' %}
-{% for i in (1..items_max) reversed %}
-  {% for taxonomy in include.taxonomies %}
-    {% if taxonomy[1].size == i %}
-      <section id="{{ taxonomy[0] | slugify }}" class="taxonomy__section">
-        <h2 class="archive__subtitle">{{ taxonomy[0] }}</h2>
-        <div class="entries-{{ entries_layout }}">
-          {% for post in taxonomy.last %}
-            {% include archive-single.html type=entries_layout %}
-          {% endfor %}
-        </div>
-        <a href="#page-title" class="back-to-top">{{ site.data.ui-text[site.locale].back_to_top | default: 'Back to Top' }} &uarr;</a>
-      </section>
+
+<div class="taxonomy-tree">
+  
+  {% comment %} 1. 상위 카테고리 (categories[0]) 이름 목록을 안전하게 생성 {% endcomment %}
+  {% assign primary_categories_list = "" | split: "," %}
+  {% for post in site.posts %}
+    {% comment %} post.categories 배열의 첫 번째 요소 (상위 카테고리)를 변수에 저장 {% endcomment %}
+    {% assign primary_cat = post.categories | first %}
+    
+    {% if primary_cat and primary_cat != "" %}
+      {% assign primary_categories_list = primary_categories_list | push: primary_cat %}
     {% endif %}
   {% endfor %}
-{% endfor %}
+  {% assign primary_categories = primary_categories_list | uniq | sort %}
+
+  {% for primary_cat_name in primary_categories %}
+    
+    {% comment %} 2. 현재 상위 카테고리에 속하는 포스트 및 하위 카테고리 이름을 모읍니다. {% endcomment %}
+    {% assign primary_cat_posts = "" | split: "," %}
+    {% assign subcategory_names = "" | split: "," %}
+    
+    {% for post in site.posts %}
+      {% assign post_primary_cat = post.categories | first %}
+      
+      {% comment %} post의 상위 카테고리가 현재 primary_cat_name과 일치하는 포스트만 선택 {% endcomment %}
+      {% if post_primary_cat == primary_cat_name %}
+        {% assign primary_cat_posts = primary_cat_posts | push: post %}
+        
+        {% comment %} 하위 카테고리 이름 (categories | last)도 수집 {% endcomment %}
+        {% assign sub_name = post.categories | last %}
+        {% assign subcategory_names = subcategory_names | push: sub_name %}
+      {% endif %}
+    {% endfor %}
+    
+    {% assign unique_subcategories = subcategory_names | uniq | sort %}
+
+    <details class="category-group" open>
+      <summary>
+        <i class="fas fa-folder"></i>
+        <strong>{{ primary_cat_name }}</strong>
+        <span class="taxonomy__count">{{ primary_cat_posts | size }} posts</span>
+      </summary>
+
+      {% comment %} 3. 고유한 하위 카테고리 이름 목록을 순회하며 그룹 생성 {% endcomment %}
+      {% for sub_name in unique_subcategories %}
+        
+        {% comment %} 4. 해당 하위 카테고리(sub_name)에 속하는 포스트만 필터링 {% endcomment %}
+        {% assign sub_items = "" | split: "," %}
+        {% for post in primary_cat_posts %}
+            {% assign post_sub_cat = post.categories | last %}
+            
+            {% if post_sub_cat == sub_name %}
+                {% assign sub_items = sub_items | push: post %}
+            {% endif %}
+        {% endfor %}
+        
+        {% comment %} 5. 하위 카테고리 이름이 상위 카테고리 이름과 다르다면 하위 폴더로 표시 {% endcomment %}
+        {% if sub_name != primary_cat_name %}
+          <details class="subcategory-group" open>
+            <summary>
+              <i class="fas fa-folder-open"></i>
+              {{ sub_name }}
+              <span class="taxonomy__count">{{ sub_items | size }} posts</span>
+            </summary>
+
+            <ul class="post-list">
+              {% for post in sub_items %}
+                <li>
+                  <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+                </li>
+              {% endfor %}
+            </ul>
+          </details>
+        {% else %}
+          {% comment %} 단일 카테고리 포스트 (예: GITHUB) 목록을 바로 표시 {% endcomment %}
+          <ul class="post-list">
+            {% for post in sub_items %}
+              <li>
+                <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
+              </li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+      {% endfor %}
+    </details>
+  {% endfor %}
+</div>
+
+{% comment %} 
+===================================================================================
+2. 상위 if 태그 닫기 (Line 103 근처)
+===================================================================================
+{% endcomment %}
+{% endif %}

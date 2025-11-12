@@ -1,0 +1,31 @@
+.taxonomy-tree {
+  margin: 2rem 0;
+}
+
+.category-group, .subcategory-group {
+  background: #1e1e1e;
+  border-radius: 8px;
+  margin-bottom: 10px;
+  padding: 10px 15px;
+}
+
+.category-group summary, .subcategory-group summary {
+  cursor: pointer;
+  font-weight: 600;
+  color: #d4d4d4;
+}
+
+.post-list {
+  margin-left: 1.5rem;
+  list-style: none;
+  padding: 5px 0;
+}
+
+.post-list a {
+  color: #9cdcfe;
+  text-decoration: none;
+}
+
+.post-list a:hover {
+  text-decoration: underline;
+}
