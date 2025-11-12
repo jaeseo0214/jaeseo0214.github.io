@@ -29,3 +29,68 @@
 .post-list a:hover {
   text-decoration: underline;
 }
+
+
+// ==============================
+// Tag grid layout (custom style)
+// ==============================
+.tag-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 0.8rem 1.2rem;
+  margin-top: 1.5rem;
+}
+
+.tag-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-family: "Fira Code", "JetBrains Mono", monospace;
+  font-size: 1.15rem; // 본문 크기 ↑
+  color: #d7d7d7; // 눈에 편한 밝기
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 10px;
+  padding: 10px 16px;
+  transition: all 0.25s ease-in-out;
+
+  a {
+    text-decoration: none;
+    color: inherit;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px; // 이름과 숫자 간격을 거의 붙임
+  }
+
+  span {
+    font-size: 1rem; // 숫자만 살짝 작게
+    color: #a0a0a0; // 너무 튀지 않게
+    font-weight: 500;
+  }
+
+  &:hover {
+    color: #fff8b5;
+    background: rgba(255, 255, 255, 0.08);
+    border-color: #b5fff3;
+    transform: translateY(-2px);
+    box-shadow: 0 2px 8px rgba(255, 248, 181, 0.15);
+  }
+}
+
+// 반응형 (태블릿 이하)
+@media screen and (max-width: 768px) {
+  .tag-grid {
+    grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+    gap: 0.6rem 0.8rem;
+  }
+
+  .tag-item {
+    font-size: 1.05rem;
+    padding: 8px 12px;
+  }
+
+  .tag-item span {
+    font-size: 0.95rem;
+  }
+}

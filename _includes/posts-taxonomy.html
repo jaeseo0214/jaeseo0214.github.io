@@ -42,7 +42,7 @@
     
     {% assign unique_subcategories = subcategory_names | uniq | sort %}
 
-    <details class="category-group" open>
+    <details class="category-group">
       <summary>
         <i class="fas fa-folder"></i>
         <strong>{{ primary_cat_name }}</strong>
@@ -64,7 +64,7 @@
         
         {% comment %} 5. 하위 카테고리 이름이 상위 카테고리 이름과 다르다면 하위 폴더로 표시 {% endcomment %}
         {% if sub_name != primary_cat_name %}
-          <details class="subcategory-group" open>
+          <details class="subcategory-group">
             <summary>
               <i class="fas fa-folder-open"></i>
               {{ sub_name }}
@@ -96,7 +96,30 @@
 
 {% comment %} 
 ===================================================================================
-2. 상위 if 태그 닫기 (Line 103 근처)
+2. 상위 if 태그 닫기 (카테고리 섹션 종료)
 ===================================================================================
 {% endcomment %}
+{% endif %}
+
+
+{% comment %}
+===================================================================================
+3. 태그 페이지 조건 추가 (tag-archive.md / layout: tags)
+===================================================================================
+{% endcomment %}
+{% if page.layout contains 'tag' or page.url contains 'tags' %}
+
+<div class="tag-grid">
+  {% assign sorted_tags = site.tags | sort %}
+  {% for tag in sorted_tags %}
+    {% assign tag_name = tag[0] %}
+    {% assign posts = tag[1] %}
+    <a class="tag-item" href="{{ '/tags/#' | append: tag_name | relative_url }}">
+      <span>{{ tag_name }}</span>
+      <span>{{ posts | size }}</span>
+    </a>
+  {% endfor %}
+</div>
+
+
 {% endif %}

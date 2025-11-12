@@ -1,15 +1,13 @@
-{% comment %} 
-_includes/posts-tag.html 또는 유사 파일 내용
-이 코드는 해당 태그 페이지의 이름(taxonomy)과 일치하는 태그를 가진 포스트만 출력합니다.
-{% endcomment %}
-<ul class="taxonomy__index">
-  {% comment %} taxonomy 변수를 이용하여 site.tags에서 현재 태그에 해당하는 포스트 그룹을 가져옵니다. {% endcomment %}
-  {% assign posts = site.tags[page.taxonomy] %}
-  
-  {% for post in posts %}
-    <li>
-      <a href="{{ post.url | relative_url }}">{{ post.title }}</a>
-      <small>{{ post.date | date: "%Y-%m-%d" }}</small>
-    </li>
-  {% endfor %}
-</ul>
+---
+layout: archive
+---
+
+{{ content }}
+
+{% assign entries_layout = page.entries_layout | default: 'list' %}
+
+<div class="entries-{{ entries_layout }}">
+
+  {% include posts-tag.html taxonomy=page.taxonomy type=entries_layout %}
+
+</div>

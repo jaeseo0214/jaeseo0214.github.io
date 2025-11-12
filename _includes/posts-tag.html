@@ -1,11 +1,7 @@
-{% comment %} 
-posts-tag.html: include.taxonomy가 없으면 page.title을 태그 이름으로 사용합니다. 
-{% endcomment %}
-{% assign current_tag_name = include.taxonomy | default: page.title %}
-
-{% comment %} site.tags에서 해당 태그 포스트 목록을 가져옵니다. {% endcomment %}
-{% assign posts = site.tag[current_tag_name] | where_exp: "post", "post.hidden != true" %}
+{% assign posts = site.tags[include.taxonomy] | where_exp: "post", "post.hidden != true" %}
 
 {%- for post in posts -%}
+
   {% include archive-single.html %}
+
 {%- endfor -%}
