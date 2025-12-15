@@ -14,3 +14,7 @@ related: true
 sidebar:
   nav: "categories_sidebar"
 ---
+
+
+이 글은 내가 노트북에서 jekyll 기반 깃허브 블로그를 데스크톱에서도 운영하기 위해<br>
+했던 방법들을 기록한 글이다.<br>
