@@ -22,4 +22,7 @@ categories_sidebar:
       - title: "사용자 코딩 학습 AI"
         url: /categories/project_personal_ai/
   - title: Github
+    chidren:
+      - title: "설정"
+        url: /categories/github_setup/
        
