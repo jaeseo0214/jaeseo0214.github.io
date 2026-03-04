@@ -1,13 +1,13 @@
 ---
-title: "사용자 코딩 학습 AI"
+title: "팝업스토어 최적 경로 계산"
 layout: archive
-permalink: categories/project_personal_ai
+permalink: categories/popup_store/
 author_profile: true
 sidebar:
   nav: "categories_sidebar"
 ---
 
-{% assign posts = site.categories['project_personal_ai']%}
+{% assign posts = site.categories['popup_store']%}
 {% for post in posts %}
   {% include archive-single.html type=page.entries_layout %}
 {% endfor %}

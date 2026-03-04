@@ -19,8 +19,8 @@ categories_sidebar:
         url: /categories/java_grammer/
   - title: Project
     children:
-      - title: "사용자 코딩 학습 AI"
-        url: /categories/project_personal_ai/
+      - title: "팝업스토어 최적 경로 계산"
+        url: /categories/popup_store/
   - title: Github
     children:
       - title: "설정"
